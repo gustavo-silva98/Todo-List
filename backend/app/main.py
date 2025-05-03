@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import login_input 
+from dotenv import load_dotenv
+import os
+import asyncpg
+
+load_dotenv()
 
 app = FastAPI(title="ToDo List")
 
@@ -19,3 +24,20 @@ app.add_middleware(
 @app.get('/')
 def root():
     return "Nós estamos construindo essa bagaça"
+
+DATABASE_URL = os.getenv("DB_URL")
+
+
+async def connect_to_db():
+    conn = await asyncpg.connect(DATABASE_URL)
+    return conn
+
+@app.on_event("startup")
+async def startup():
+    conn = await connect_to_db()
+    print("Conexão estabelecida com o banco de dados!")
+    await conn.close()  # Fechar a conexão após o teste de conexão
+
+@app.get("/teste")
+async def teste():
+    return {"message": "FastAPI está funcionando com o PostgreSQL no Render!"}
