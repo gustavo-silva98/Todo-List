@@ -1,14 +1,15 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from backend.database import database
+from backend.database.database import connect_to_db,close_db
+from backend.config import logger
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Executa a conexão com o banco de dados na inicialização do aplicativo
-    conn = await database.connect_to_db()
-    print("Conexão estabelecida com o banco de dados!")
-    # Yield para """aguardar""" o aplicativo rodar
+    #Inicialização da app
+    logger.info("Iniciando o aplicativo")
+    # Executa a conexão com o BD na inicialização
+    app.state.db = await connect_to_db()
     yield
-    # Executa a desconexão com o banco de dados na finalização do aplicativo
-    await conn.close()
-    print("Conexão com o banco de dados fechada!")
+    
+    # Finalização do app
+    await close_db(app.state.db)

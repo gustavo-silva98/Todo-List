@@ -1,0 +1,56 @@
+2025-05-03 13:01:33,237 | INFO     | Will watch for changes in these directories: ['C:\\Users\\goliveira1\\OneDrive - UNIVERSO ONLINE S.A\\Área de Trabalho\\Python\\FastAPI basico\\todo list\\backend']
+2025-05-03 13:01:33,241 | INFO     | Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2025-05-03 13:01:33,241 | INFO     | Started reloader process [79420] using WatchFiles
+2025-05-03 13:01:35,304 | INFO     | Started server process [36528]
+2025-05-03 13:01:35,304 | INFO     | Waiting for application startup.
+2025-05-03 13:01:35,322 | INFO     | ASGI 'lifespan' protocol appears unsupported.
+2025-05-03 13:01:35,326 | INFO     | Application startup complete.
+2025-05-03 13:01:48,117 | INFO     | 1 change detected
+2025-05-03 13:02:05,624 | INFO     | Shutting down
+2025-05-03 13:02:05,724 | INFO     | Finished server process [36528]
+2025-05-03 13:02:05,825 | INFO     | Stopping reloader process [79420]
+2025-05-03 13:03:07,107 | INFO     | Will watch for changes in these directories: ['C:\\Users\\goliveira1\\OneDrive - UNIVERSO ONLINE S.A\\Área de Trabalho\\Python\\FastAPI basico\\todo list\\backend']
+2025-05-03 13:03:07,124 | INFO     | Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2025-05-03 13:03:07,190 | INFO     | Started reloader process [22724] using WatchFiles
+2025-05-03 13:03:09,366 | INFO     | Started server process [87148]
+2025-05-03 13:03:09,366 | INFO     | Waiting for application startup.
+2025-05-03 13:03:09,366 | INFO     | ASGI 'lifespan' protocol appears unsupported.
+2025-05-03 13:03:09,366 | INFO     | Application startup complete.
+2025-05-03 13:03:21,282 | INFO     | 1 change detected
+2025-05-03 13:03:35,334 | INFO     | Shutting down
+2025-05-03 13:03:35,450 | INFO     | Finished server process [87148]
+2025-05-03 13:03:35,551 | INFO     | Stopping reloader process [22724]
+2025-05-03 13:08:48,625 | INFO     | Will watch for changes in these directories: ['C:\\Users\\goliveira1\\OneDrive - UNIVERSO ONLINE S.A\\Área de Trabalho\\Python\\FastAPI basico\\todo list\\backend']
+2025-05-03 13:08:48,628 | INFO     | Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2025-05-03 13:08:48,630 | INFO     | Started reloader process [74856] using WatchFiles
+2025-05-03 13:08:50,819 | INFO     | Started server process [45060]
+2025-05-03 13:08:50,823 | INFO     | Waiting for application startup.
+2025-05-03 13:08:50,825 | INFO     | ASGI 'lifespan' protocol appears unsupported.
+2025-05-03 13:08:50,826 | INFO     | Application startup complete.
+2025-05-03 13:09:01,839 | INFO     | 1 change detected
+2025-05-03 13:10:07,739 | INFO     | Shutting down
+2025-05-03 13:10:07,850 | INFO     | Finished server process [45060]
+2025-05-03 13:10:08,021 | INFO     | Stopping reloader process [74856]
+2025-05-03 13:20:44,586 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:23:29,225 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:23:40,694 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:24:01,585 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:24:21,685 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:24:24,088 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:25:48,621 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:26:24,312 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:26:52,680 | ERROR    | ❌ DATABASE_URL não definida
+2025-05-03 13:27:45,476 | INFO     | 🔌 Conectando ao banco de dados...
+2025-05-03 13:28:29,027 | INFO     | ✅ Conexão estabelecida.
+2025-05-03 13:29:13,477 | INFO     | 🔒 Fechando conexão com o banco de dados...
+2025-05-03 13:29:13,644 | INFO     | ✔️ Conexão fechada.
+2025-05-03 14:21:20,350 | INFO | Iniciando o aplicativo
+2025-05-03 14:22:04,115 | INFO | Conexão estabelecida com o banco de dados
+2025-05-03 14:22:27,603 | INFO | Finalizando conexão com banco de dados
+2025-05-03 14:22:27,769 | INFO | Conexão finalizada com o banco de dados
+2025-05-03 14:24:17,055 | INFO | Iniciando o aplicativo
+2025-05-03 14:25:00,804 | INFO | Conexão estabelecida com o banco de dados
+2025-05-03 14:25:15,505 | INFO | Finalizando conexão com banco de dados
+2025-05-03 14:25:15,673 | INFO | Conexão finalizada com o banco de dados
+2025-05-03 14:25:29,340 | INFO | Iniciando o aplicativo
+2025-05-03 14:26:13,245 | INFO | Conexão estabelecida com o banco de dados

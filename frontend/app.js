@@ -23,7 +23,7 @@ function enviarCadastro() {
         confirmar_senha: senhaConfirmacao
     };
     alert('Dados do cadastro: ' + JSON.stringify(data)); // Exibe os dados no console para depuração
-    fetch('http://127.0.0.1:8000/cadastro', { 
+    fetch('http://127.0.0.1:8000/auth/cadastro', { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
