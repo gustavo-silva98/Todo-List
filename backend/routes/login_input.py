@@ -1,4 +1,4 @@
-from app.schemas import schemas
+from backend.schemas import schemas
 from fastapi import APIRouter
 
 router = APIRouter()

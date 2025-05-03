@@ -1,35 +1,23 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from routes import login_input 
-from dotenv import load_dotenv
-from database import database
+from .utils.middleware import add_cors_middleware
+from .routes import login_input 
+from .lifespan.lifespan import lifespan
 
+from dotenv import load_dotenv
 load_dotenv()
 
-
-app = FastAPI(title="ToDo List")
+app = FastAPI(title="ToDo List",lifespan=lifespan)
 
 #inclui as rotas
 app.include_router(login_input.router)
 
-# Configuração do CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # ou especifique a origem: ["http://localhost:5500"]
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Adiciona o middleware CORS
+add_cors_middleware(app)
 
 @app.get('/')
 def root():
     return "Nós estamos construindo essa bagaça"
 
-@app.on_event("startup")
-async def startup():
-    conn = await database.connect_to_db()
-    print("Conexão estabelecida com o banco de dados!")
-    await conn.close()  # Fechar a conexão após o teste de conexão
 
 @app.get("/teste")
 async def teste():
