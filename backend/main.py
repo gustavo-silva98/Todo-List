@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import login_input 
+from routes import login_input 
 from dotenv import load_dotenv
-from app.database import database
+from database import database
 
 load_dotenv()
 
