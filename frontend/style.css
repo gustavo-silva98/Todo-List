@@ -87,7 +87,7 @@ form input{
     box-sizing: border-box;
     flex-grow: 1;
     min-width: 0;
-    height: 50px;
+    height: 45px;
     padding: 1em;
     font: inherit;
     border-radius: 0 10px 10px 0;
@@ -135,10 +135,17 @@ form button:focus{
         border-radius: 0;
     }}
 
-img {
+img.calma-ai-paizao {
     border-radius: 20px 20px 20px 20px;
     box-shadow: #020202 0px 0px 5px 0px;
 }
+
+img.cat-status200 {
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: #020202 0px 0px 5px 0px;
+    height: 250px;
+}
+
 .wrapper {
     transform: translateX(100%);
     opacity: 0;
