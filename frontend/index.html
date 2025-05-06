@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="wrapper" data-pagina="cadastro" id ="cadastro">
-            <h1>Cadastre-se</h1>
+            <h1>Cadastro</h1>
             <form>
                 <div>
                     <label for="name-input"><span class="material-icons">person</span></label>
@@ -29,7 +29,7 @@
                     <input type="password" id="repeat-password-input" name="repeat-password" placeholder="Confime a Senha" required>
                 </div>
                 <button type="button" onclick="enviarCadastro()">Cadastrar</button>
-                <p1> Já tem uma conta? <a href="#" onclick="mudarPagina('login')">Clique aqui</a> para fazer login. </p1>
+                <p> Já tem uma conta? <a href="#" onclick="mudarPagina('login')">Clique aqui</a> para fazer login. </p>
             </form>
         </div>
         <div class="wrapper-ativo" data-pagina="login" id ="login">
@@ -44,11 +44,11 @@
                     <input type="password" id="password-input" name="password" placeholder="Senha" required>
                 </div>
                 <button type="button" onclick="enviarCadastro()">LOGIN</button>
-                <p2> Ainda não é cadastrado?</p2>
-                <p3 ><a href="#" onclick="mudarPagina('cadastro')">Clique aqui</a> para se cadastrar.</p3>
+                <p> Ainda não é cadastrado?</p>
+                <p ><a href="#" onclick="mudarPagina('cadastro')">Clique aqui</a> para se cadastrar.</p>
             </form>
         </div>
-        
+
         <div class="wrapper" data-pagina="login-bem-sucedido" id="login-ok">
             <h1>Login bem-sucedido!</h1>
             <img src="https://http.cat/200" alt="cat status" class="cat-status200"
