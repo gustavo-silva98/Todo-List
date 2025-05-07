@@ -257,3 +257,731 @@ WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nsp
 2025-05-05 09:06:48,914 | INFO | [generated in 0.04853s] ('e',)
 2025-05-05 09:06:49,272 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
 2025-05-05 09:06:49,278 | INFO | COMMIT
+2025-05-07 00:39:14,075 | INFO | Iniciando o aplicativo
+2025-05-07 00:39:58,366 | INFO | select pg_catalog.version()
+2025-05-07 00:39:58,366 | INFO | [raw sql] ()
+2025-05-07 00:39:59,080 | INFO | select current_schema()
+2025-05-07 00:39:59,080 | INFO | [raw sql] ()
+2025-05-07 00:39:59,829 | INFO | show standard_conforming_strings
+2025-05-07 00:39:59,829 | INFO | [raw sql] ()
+2025-05-07 00:40:00,345 | INFO | BEGIN (implicit)
+2025-05-07 00:40:00,364 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 00:40:00,370 | INFO | [generated in 0.00228s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 00:40:00,930 | INFO | COMMIT
+2025-05-07 00:40:01,111 | INFO | BEGIN (implicit)
+2025-05-07 00:40:01,111 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 00:40:01,127 | INFO | [generated in 0.00358s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 00:40:01,682 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:40:01,684 | INFO | [generated in 0.00244s] (True, 0, 'd')
+2025-05-07 00:40:02,045 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:40:02,045 | INFO | [generated in 0.00104s] ('e',)
+2025-05-07 00:40:02,411 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 00:40:02,411 | INFO | COMMIT
+2025-05-07 00:43:00,747 | INFO | Iniciando o aplicativo
+2025-05-07 00:43:44,903 | INFO | select pg_catalog.version()
+2025-05-07 00:43:44,904 | INFO | [raw sql] ()
+2025-05-07 00:43:45,585 | INFO | select current_schema()
+2025-05-07 00:43:45,585 | INFO | [raw sql] ()
+2025-05-07 00:43:46,285 | INFO | show standard_conforming_strings
+2025-05-07 00:43:46,285 | INFO | [raw sql] ()
+2025-05-07 00:43:46,818 | INFO | BEGIN (implicit)
+2025-05-07 00:43:46,818 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 00:43:46,818 | INFO | [generated in 0.00121s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 00:43:47,419 | INFO | COMMIT
+2025-05-07 00:43:47,618 | INFO | BEGIN (implicit)
+2025-05-07 00:43:47,618 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 00:43:47,618 | INFO | [generated in 0.00176s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 00:43:48,167 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:43:48,169 | INFO | [generated in 0.00201s] (True, 0, 'd')
+2025-05-07 00:43:48,552 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:43:48,552 | INFO | [generated in 0.00129s] ('e',)
+2025-05-07 00:43:48,901 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 00:43:48,901 | INFO | COMMIT
+2025-05-07 00:46:11,119 | INFO | Iniciando o aplicativo
+2025-05-07 00:46:55,292 | INFO | select pg_catalog.version()
+2025-05-07 00:46:55,292 | INFO | [raw sql] ()
+2025-05-07 00:46:55,992 | INFO | select current_schema()
+2025-05-07 00:46:55,992 | INFO | [raw sql] ()
+2025-05-07 00:46:56,676 | INFO | show standard_conforming_strings
+2025-05-07 00:46:56,676 | INFO | [raw sql] ()
+2025-05-07 00:46:57,192 | INFO | BEGIN (implicit)
+2025-05-07 00:46:57,192 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 00:46:57,192 | INFO | [generated in 0.00117s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 00:46:57,726 | INFO | COMMIT
+2025-05-07 00:46:57,926 | INFO | BEGIN (implicit)
+2025-05-07 00:46:57,926 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 00:46:57,932 | INFO | [generated in 0.00168s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 00:46:58,465 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:46:58,475 | INFO | [generated in 0.00166s] (True, 0, 'd')
+2025-05-07 00:46:58,843 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:46:58,843 | INFO | [generated in 0.00113s] ('e',)
+2025-05-07 00:46:59,209 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 00:46:59,210 | INFO | COMMIT
+2025-05-07 00:48:23,753 | INFO | Iniciando o aplicativo
+2025-05-07 00:49:08,112 | INFO | select pg_catalog.version()
+2025-05-07 00:49:08,112 | INFO | [raw sql] ()
+2025-05-07 00:49:08,862 | INFO | select current_schema()
+2025-05-07 00:49:08,862 | INFO | [raw sql] ()
+2025-05-07 00:49:09,561 | INFO | show standard_conforming_strings
+2025-05-07 00:49:09,561 | INFO | [raw sql] ()
+2025-05-07 00:49:10,095 | INFO | BEGIN (implicit)
+2025-05-07 00:49:10,111 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 00:49:10,111 | INFO | [generated in 0.00121s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 00:49:10,661 | INFO | COMMIT
+2025-05-07 00:49:10,844 | INFO | BEGIN (implicit)
+2025-05-07 00:49:10,844 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 00:49:10,859 | INFO | [generated in 0.00164s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 00:49:11,394 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:49:11,394 | INFO | [generated in 0.00115s] (True, 0, 'd')
+2025-05-07 00:49:11,744 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:49:11,761 | INFO | [generated in 0.00201s] ('e',)
+2025-05-07 00:49:12,112 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 00:49:12,112 | INFO | COMMIT
+2025-05-07 00:52:05,334 | INFO | Iniciando o aplicativo
+2025-05-07 00:52:49,390 | INFO | select pg_catalog.version()
+2025-05-07 00:52:49,390 | INFO | [raw sql] ()
+2025-05-07 00:52:50,189 | INFO | select current_schema()
+2025-05-07 00:52:50,191 | INFO | [raw sql] ()
+2025-05-07 00:52:50,924 | INFO | show standard_conforming_strings
+2025-05-07 00:52:50,924 | INFO | [raw sql] ()
+2025-05-07 00:52:51,458 | INFO | BEGIN (implicit)
+2025-05-07 00:52:51,463 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 00:52:51,463 | INFO | [generated in 0.00094s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 00:52:51,990 | INFO | COMMIT
+2025-05-07 00:52:52,173 | INFO | BEGIN (implicit)
+2025-05-07 00:52:52,173 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 00:52:52,173 | INFO | [generated in 0.00175s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 00:52:52,740 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:52:52,740 | INFO | [generated in 0.00144s] (True, 0, 'd')
+2025-05-07 00:52:53,090 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 00:52:53,090 | INFO | [generated in 0.00084s] ('e',)
+2025-05-07 00:52:53,492 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 00:52:53,492 | INFO | COMMIT
+2025-05-07 01:01:21,150 | INFO | Iniciando o aplicativo
+2025-05-07 01:02:05,262 | INFO | select pg_catalog.version()
+2025-05-07 01:02:05,263 | INFO | [raw sql] ()
+2025-05-07 01:02:05,963 | INFO | select current_schema()
+2025-05-07 01:02:05,964 | INFO | [raw sql] ()
+2025-05-07 01:02:06,694 | INFO | show standard_conforming_strings
+2025-05-07 01:02:06,695 | INFO | [raw sql] ()
+2025-05-07 01:02:07,305 | INFO | BEGIN (implicit)
+2025-05-07 01:02:07,310 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:02:07,311 | INFO | [generated in 0.00119s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:02:07,860 | INFO | COMMIT
+2025-05-07 01:02:08,035 | INFO | BEGIN (implicit)
+2025-05-07 01:02:08,041 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:02:08,043 | INFO | [generated in 0.00248s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:02:08,607 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:02:08,607 | INFO | [generated in 0.00091s] (True, 0, 'd')
+2025-05-07 01:02:09,013 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:02:09,014 | INFO | [generated in 0.00086s] ('e',)
+2025-05-07 01:02:09,414 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:02:09,414 | INFO | COMMIT
+2025-05-07 01:02:46,706 | INFO | BEGIN (implicit)
+2025-05-07 01:02:46,707 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios
+2025-05-07 01:02:46,707 | INFO | [generated in 0.00117s] ()
+2025-05-07 01:03:11,932 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios
+2025-05-07 01:03:11,933 | INFO | [cached since 25.22s ago] ()
+2025-05-07 01:04:17,937 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios
+2025-05-07 01:04:17,944 | INFO | [cached since 91.23s ago] ()
+2025-05-07 01:04:42,106 | INFO | ROLLBACK
+2025-05-07 01:05:13,280 | INFO | Iniciando o aplicativo
+2025-05-07 01:05:57,431 | INFO | select pg_catalog.version()
+2025-05-07 01:05:57,431 | INFO | [raw sql] ()
+2025-05-07 01:05:58,181 | INFO | select current_schema()
+2025-05-07 01:05:58,181 | INFO | [raw sql] ()
+2025-05-07 01:05:58,948 | INFO | show standard_conforming_strings
+2025-05-07 01:05:58,948 | INFO | [raw sql] ()
+2025-05-07 01:05:59,481 | INFO | BEGIN (implicit)
+2025-05-07 01:05:59,481 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:05:59,481 | INFO | [generated in 0.00102s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:06:00,014 | INFO | COMMIT
+2025-05-07 01:06:00,182 | INFO | BEGIN (implicit)
+2025-05-07 01:06:00,182 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:06:00,182 | INFO | [generated in 0.00171s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:06:00,731 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:06:00,731 | INFO | [generated in 0.00099s] (True, 0, 'd')
+2025-05-07 01:06:01,115 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:06:01,115 | INFO | [generated in 0.00095s] ('e',)
+2025-05-07 01:06:01,498 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:06:01,498 | INFO | COMMIT
+2025-05-07 01:07:40,260 | INFO | Iniciando o aplicativo
+2025-05-07 01:08:24,768 | INFO | select pg_catalog.version()
+2025-05-07 01:08:24,768 | INFO | [raw sql] ()
+2025-05-07 01:08:25,485 | INFO | select current_schema()
+2025-05-07 01:08:25,485 | INFO | [raw sql] ()
+2025-05-07 01:08:26,200 | INFO | show standard_conforming_strings
+2025-05-07 01:08:26,200 | INFO | [raw sql] ()
+2025-05-07 01:08:26,801 | INFO | BEGIN (implicit)
+2025-05-07 01:08:26,801 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:08:26,801 | INFO | [generated in 0.00137s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:08:27,351 | INFO | COMMIT
+2025-05-07 01:08:27,534 | INFO | BEGIN (implicit)
+2025-05-07 01:08:27,534 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:08:27,534 | INFO | [generated in 0.00154s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:08:28,068 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:08:28,068 | INFO | [generated in 0.00136s] (True, 0, 'd')
+2025-05-07 01:08:28,434 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:08:28,434 | INFO | [generated in 0.00094s] ('e',)
+2025-05-07 01:08:28,785 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:08:28,785 | INFO | COMMIT
+2025-05-07 01:10:07,131 | INFO | BEGIN (implicit)
+2025-05-07 01:10:07,133 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios
+2025-05-07 01:10:07,134 | INFO | [generated in 0.00119s] ()
+2025-05-07 01:10:52,701 | INFO | ROLLBACK
+2025-05-07 01:10:59,819 | INFO | Iniciando o aplicativo
+2025-05-07 01:11:44,106 | INFO | select pg_catalog.version()
+2025-05-07 01:11:44,106 | INFO | [raw sql] ()
+2025-05-07 01:11:44,826 | INFO | select current_schema()
+2025-05-07 01:11:44,826 | INFO | [raw sql] ()
+2025-05-07 01:11:45,523 | INFO | show standard_conforming_strings
+2025-05-07 01:11:45,523 | INFO | [raw sql] ()
+2025-05-07 01:11:46,073 | INFO | BEGIN (implicit)
+2025-05-07 01:11:46,073 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:11:46,073 | INFO | [generated in 0.00102s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:11:46,607 | INFO | COMMIT
+2025-05-07 01:11:46,773 | INFO | BEGIN (implicit)
+2025-05-07 01:11:46,773 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:11:46,791 | INFO | [generated in 0.00297s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:11:47,346 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:11:47,346 | INFO | [generated in 0.00115s] (True, 0, 'd')
+2025-05-07 01:11:47,691 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:11:47,691 | INFO | [generated in 0.00116s] ('e',)
+2025-05-07 01:11:48,056 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:11:48,056 | INFO | COMMIT
+2025-05-07 01:15:22,499 | INFO | Iniciando o aplicativo
+2025-05-07 01:16:06,819 | INFO | select pg_catalog.version()
+2025-05-07 01:16:06,819 | INFO | [raw sql] ()
+2025-05-07 01:16:07,520 | INFO | select current_schema()
+2025-05-07 01:16:07,520 | INFO | [raw sql] ()
+2025-05-07 01:16:08,236 | INFO | show standard_conforming_strings
+2025-05-07 01:16:08,236 | INFO | [raw sql] ()
+2025-05-07 01:16:08,753 | INFO | BEGIN (implicit)
+2025-05-07 01:16:08,770 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:16:08,770 | INFO | [generated in 0.00127s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:16:09,286 | INFO | COMMIT
+2025-05-07 01:16:09,469 | INFO | BEGIN (implicit)
+2025-05-07 01:16:09,469 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:16:09,469 | INFO | [generated in 0.00187s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:16:10,037 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:16:10,037 | INFO | [generated in 0.00131s] (True, 0, 'd')
+2025-05-07 01:16:10,387 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:16:10,387 | INFO | [generated in 0.00128s] ('e',)
+2025-05-07 01:16:10,754 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:16:10,754 | INFO | COMMIT
+2025-05-07 01:18:17,852 | INFO | Iniciando o aplicativo
+2025-05-07 01:19:02,105 | INFO | select pg_catalog.version()
+2025-05-07 01:19:02,105 | INFO | [raw sql] ()
+2025-05-07 01:19:02,837 | INFO | select current_schema()
+2025-05-07 01:19:02,837 | INFO | [raw sql] ()
+2025-05-07 01:19:03,589 | INFO | show standard_conforming_strings
+2025-05-07 01:19:03,596 | INFO | [raw sql] ()
+2025-05-07 01:19:04,139 | INFO | BEGIN (implicit)
+2025-05-07 01:19:04,140 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:19:04,140 | INFO | [generated in 0.00094s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:19:04,722 | INFO | COMMIT
+2025-05-07 01:19:04,906 | INFO | BEGIN (implicit)
+2025-05-07 01:19:04,908 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:19:04,916 | INFO | [generated in 0.00257s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:19:05,574 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:19:05,574 | INFO | [generated in 0.00158s] (True, 0, 'd')
+2025-05-07 01:19:05,959 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:19:05,959 | INFO | [generated in 0.00106s] ('e',)
+2025-05-07 01:19:06,323 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:19:06,323 | INFO | COMMIT
+2025-05-07 01:26:37,151 | INFO | Iniciando o aplicativo
+2025-05-07 01:27:21,508 | INFO | select pg_catalog.version()
+2025-05-07 01:27:21,510 | INFO | [raw sql] ()
+2025-05-07 01:27:22,206 | INFO | select current_schema()
+2025-05-07 01:27:22,206 | INFO | [raw sql] ()
+2025-05-07 01:27:22,921 | INFO | show standard_conforming_strings
+2025-05-07 01:27:22,921 | INFO | [raw sql] ()
+2025-05-07 01:27:23,439 | INFO | BEGIN (implicit)
+2025-05-07 01:27:23,457 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:27:23,458 | INFO | [generated in 0.00150s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:27:23,984 | INFO | COMMIT
+2025-05-07 01:27:24,156 | INFO | BEGIN (implicit)
+2025-05-07 01:27:24,156 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:27:24,156 | INFO | [generated in 0.00178s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:27:24,722 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:27:24,722 | INFO | [generated in 0.00119s] (True, 0, 'd')
+2025-05-07 01:27:25,089 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:27:25,089 | INFO | [generated in 0.00107s] ('e',)
+2025-05-07 01:27:25,455 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:27:25,455 | INFO | COMMIT
+2025-05-07 01:28:43,736 | INFO | Iniciando o aplicativo
+2025-05-07 01:29:27,820 | INFO | select pg_catalog.version()
+2025-05-07 01:29:27,820 | INFO | [raw sql] ()
+2025-05-07 01:29:28,553 | INFO | select current_schema()
+2025-05-07 01:29:28,569 | INFO | [raw sql] ()
+2025-05-07 01:29:29,271 | INFO | show standard_conforming_strings
+2025-05-07 01:29:29,271 | INFO | [raw sql] ()
+2025-05-07 01:29:29,805 | INFO | BEGIN (implicit)
+2025-05-07 01:29:29,805 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:29:29,805 | INFO | [generated in 0.00119s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:29:30,335 | INFO | COMMIT
+2025-05-07 01:29:30,506 | INFO | BEGIN (implicit)
+2025-05-07 01:29:30,506 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:29:30,506 | INFO | [generated in 0.00129s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:29:31,086 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:29:31,086 | INFO | [generated in 0.00111s] (True, 0, 'd')
+2025-05-07 01:29:31,455 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:29:31,455 | INFO | [generated in 0.00077s] ('e',)
+2025-05-07 01:29:31,805 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:29:31,805 | INFO | COMMIT
+2025-05-07 01:29:56,295 | INFO | BEGIN (implicit)
+2025-05-07 01:29:56,295 | INFO | INSERT INTO usuarios (nome, email, senha) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR) RETURNING usuarios.id
+2025-05-07 01:29:56,295 | INFO | [generated in 0.00086s] ('string', 'string', '$2b$12$bpBAEPgOL26YXB4Dhw/DX.8PWhkGNoaCQ4X4xj5/YphUw6Dc1jW62')
+2025-05-07 01:29:56,833 | INFO | ROLLBACK
+2025-05-07 01:31:25,436 | INFO | Iniciando o aplicativo
+2025-05-07 01:32:09,953 | INFO | select pg_catalog.version()
+2025-05-07 01:32:09,954 | INFO | [raw sql] ()
+2025-05-07 01:32:10,654 | INFO | select current_schema()
+2025-05-07 01:32:10,654 | INFO | [raw sql] ()
+2025-05-07 01:32:11,372 | INFO | show standard_conforming_strings
+2025-05-07 01:32:11,373 | INFO | [raw sql] ()
+2025-05-07 01:32:11,921 | INFO | BEGIN (implicit)
+2025-05-07 01:32:11,921 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:32:11,921 | INFO | [generated in 0.00100s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:32:12,505 | INFO | COMMIT
+2025-05-07 01:32:12,689 | INFO | BEGIN (implicit)
+2025-05-07 01:32:12,689 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:32:12,703 | INFO | [generated in 0.00195s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:32:13,238 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:32:13,238 | INFO | [generated in 0.00111s] (True, 0, 'd')
+2025-05-07 01:32:13,605 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:32:13,605 | INFO | [generated in 0.00111s] ('e',)
+2025-05-07 01:32:13,955 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:32:13,955 | INFO | COMMIT
+2025-05-07 01:33:25,786 | INFO | Iniciando o aplicativo
+2025-05-07 01:34:09,768 | INFO | select pg_catalog.version()
+2025-05-07 01:34:09,768 | INFO | [raw sql] ()
+2025-05-07 01:34:10,469 | INFO | select current_schema()
+2025-05-07 01:34:10,469 | INFO | [raw sql] ()
+2025-05-07 01:34:11,184 | INFO | show standard_conforming_strings
+2025-05-07 01:34:11,184 | INFO | [raw sql] ()
+2025-05-07 01:34:11,719 | INFO | BEGIN (implicit)
+2025-05-07 01:34:11,736 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:34:11,736 | INFO | [generated in 0.00121s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:34:12,251 | INFO | COMMIT
+2025-05-07 01:34:12,435 | INFO | BEGIN (implicit)
+2025-05-07 01:34:12,435 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:34:12,435 | INFO | [generated in 0.00155s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:34:12,970 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:34:12,970 | INFO | [generated in 0.00114s] (True, 0, 'd')
+2025-05-07 01:34:13,385 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:34:13,385 | INFO | [generated in 0.00093s] ('e',)
+2025-05-07 01:34:13,752 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:34:13,752 | INFO | COMMIT
+2025-05-07 01:35:49,767 | INFO | Iniciando o aplicativo
+2025-05-07 01:36:34,084 | INFO | select pg_catalog.version()
+2025-05-07 01:36:34,084 | INFO | [raw sql] ()
+2025-05-07 01:36:34,801 | INFO | select current_schema()
+2025-05-07 01:36:34,801 | INFO | [raw sql] ()
+2025-05-07 01:36:35,533 | INFO | show standard_conforming_strings
+2025-05-07 01:36:35,534 | INFO | [raw sql] ()
+2025-05-07 01:36:36,118 | INFO | BEGIN (implicit)
+2025-05-07 01:36:36,118 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:36:36,118 | INFO | [generated in 0.00119s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:36:36,700 | INFO | COMMIT
+2025-05-07 01:36:36,884 | INFO | BEGIN (implicit)
+2025-05-07 01:36:36,884 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:36:36,884 | INFO | [generated in 0.00163s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:36:37,434 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:36:37,434 | INFO | [generated in 0.00133s] (True, 0, 'd')
+2025-05-07 01:36:37,802 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:36:37,802 | INFO | [generated in 0.00086s] ('e',)
+2025-05-07 01:36:38,151 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:36:38,151 | INFO | COMMIT
+2025-05-07 01:38:02,332 | INFO | Iniciando o aplicativo
+2025-05-07 01:38:46,568 | INFO | select pg_catalog.version()
+2025-05-07 01:38:46,568 | INFO | [raw sql] ()
+2025-05-07 01:38:47,301 | INFO | select current_schema()
+2025-05-07 01:38:47,301 | INFO | [raw sql] ()
+2025-05-07 01:38:48,035 | INFO | show standard_conforming_strings
+2025-05-07 01:38:48,035 | INFO | [raw sql] ()
+2025-05-07 01:38:48,569 | INFO | BEGIN (implicit)
+2025-05-07 01:38:48,569 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:38:48,569 | INFO | [generated in 0.00112s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:38:49,135 | INFO | COMMIT
+2025-05-07 01:38:49,301 | INFO | BEGIN (implicit)
+2025-05-07 01:38:49,301 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:38:49,314 | INFO | [generated in 0.00241s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:38:49,836 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:38:49,836 | INFO | [generated in 0.00141s] (True, 0, 'd')
+2025-05-07 01:38:50,185 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:38:50,200 | INFO | [generated in 0.00152s] ('e',)
+2025-05-07 01:38:50,552 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:38:50,552 | INFO | COMMIT
+2025-05-07 01:39:50,263 | INFO | BEGIN (implicit)
+2025-05-07 01:39:50,273 | INFO | INSERT INTO usuarios (nome, email, senha_hash) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR) RETURNING usuarios.id
+2025-05-07 01:39:50,275 | INFO | [generated in 0.00190s] ('string', 'string', '$2b$12$MEP9k/kG.AMb7AblGrhTT.zHReskfFdMJ91knDhi6CMViPd3eIpGu')
+2025-05-07 01:39:50,882 | INFO | COMMIT
+2025-05-07 01:39:51,055 | INFO | BEGIN (implicit)
+2025-05-07 01:39:51,061 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios 
+WHERE usuarios.id = $1::INTEGER
+2025-05-07 01:39:51,062 | INFO | [generated in 0.00102s] (1,)
+2025-05-07 01:40:41,868 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios
+2025-05-07 01:40:41,868 | INFO | [generated in 0.00131s] ()
+2025-05-07 01:41:18,919 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios
+2025-05-07 01:41:18,920 | INFO | [cached since 37.05s ago] ()
+2025-05-07 01:42:41,229 | INFO | ROLLBACK
+2025-05-07 01:44:21,796 | INFO | Iniciando o aplicativo
+2025-05-07 01:45:05,801 | INFO | select pg_catalog.version()
+2025-05-07 01:45:05,801 | INFO | [raw sql] ()
+2025-05-07 01:45:06,479 | INFO | select current_schema()
+2025-05-07 01:45:06,480 | INFO | [raw sql] ()
+2025-05-07 01:45:07,167 | INFO | show standard_conforming_strings
+2025-05-07 01:45:07,169 | INFO | [raw sql] ()
+2025-05-07 01:45:07,681 | INFO | BEGIN (implicit)
+2025-05-07 01:45:07,690 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:45:07,691 | INFO | [generated in 0.00148s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:45:08,205 | INFO | COMMIT
+2025-05-07 01:45:08,387 | INFO | BEGIN (implicit)
+2025-05-07 01:45:08,401 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:45:08,404 | INFO | [generated in 0.00426s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:45:08,976 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:45:08,978 | INFO | [generated in 0.00249s] (True, 0, 'd')
+2025-05-07 01:45:09,354 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:45:09,368 | INFO | [generated in 0.00319s] ('e',)
+2025-05-07 01:45:09,716 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:45:09,718 | INFO | COMMIT
+2025-05-07 01:46:37,244 | INFO | BEGIN (implicit)
+2025-05-07 01:46:37,261 | INFO | INSERT INTO usuarios (nome, email, senha_hash) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR) RETURNING usuarios.id
+2025-05-07 01:46:37,261 | INFO | [generated in 0.00152s] ('string', 'string', '$2b$12$XeuS1issZkAlz21RwllW7eoW.5g3qhAye/3yiEJb6z.LxbxWuPwnS')
+2025-05-07 01:46:37,778 | INFO | ROLLBACK
+2025-05-07 01:49:45,414 | INFO | Iniciando o aplicativo
+2025-05-07 01:50:29,461 | INFO | select pg_catalog.version()
+2025-05-07 01:50:29,461 | INFO | [raw sql] ()
+2025-05-07 01:50:30,154 | INFO | select current_schema()
+2025-05-07 01:50:30,169 | INFO | [raw sql] ()
+2025-05-07 01:50:30,882 | INFO | show standard_conforming_strings
+2025-05-07 01:50:30,883 | INFO | [raw sql] ()
+2025-05-07 01:50:31,409 | INFO | BEGIN (implicit)
+2025-05-07 01:50:31,419 | INFO | SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind = ANY (ARRAY[$2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $7::VARCHAR
+2025-05-07 01:50:31,419 | INFO | [generated in 0.00477s] ('usuarios', 'r', 'p', 'f', 'v', 'm', 'pg_catalog')
+2025-05-07 01:50:31,971 | INFO | COMMIT
+2025-05-07 01:50:32,167 | INFO | BEGIN (implicit)
+2025-05-07 01:50:32,171 | INFO | SELECT pg_catalog.pg_attribute.attname AS name, pg_catalog.format_type(pg_catalog.pg_attribute.atttypid, pg_catalog.pg_attribute.atttypmod) AS format_type, (SELECT pg_catalog.pg_get_expr(pg_catalog.pg_attrdef.adbin, pg_catalog.pg_attrdef.adrelid) AS pg_get_expr_1 
+FROM pg_catalog.pg_attrdef 
+WHERE pg_catalog.pg_attrdef.adrelid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attrdef.adnum = pg_catalog.pg_attribute.attnum AND pg_catalog.pg_attribute.atthasdef) AS "default", pg_catalog.pg_attribute.attnotnull AS not_null, pg_catalog.pg_class.relname AS table_name, pg_catalog.pg_description.description AS comment, pg_catalog.pg_attribute.attgenerated AS generated, (SELECT json_build_object($1::VARCHAR, pg_catalog.pg_attribute.attidentity = $2::CHAR, $3::VARCHAR, pg_catalog.pg_sequence.seqstart, $4::VARCHAR, pg_catalog.pg_sequence.seqincrement, $5::VARCHAR, pg_catalog.pg_sequence.seqmin, $6::VARCHAR, pg_catalog.pg_sequence.seqmax, $7::VARCHAR, pg_catalog.pg_sequence.seqcache, $8::VARCHAR, pg_catalog.pg_sequence.seqcycle) AS json_build_object_1 
+FROM pg_catalog.pg_sequence 
+WHERE pg_catalog.pg_attribute.attidentity != $9::CHAR AND pg_catalog.pg_sequence.seqrelid = CAST(CAST(pg_catalog.pg_get_serial_sequence(CAST(CAST(pg_catalog.pg_attribute.attrelid AS REGCLASS) AS TEXT), pg_catalog.pg_attribute.attname) AS REGCLASS) AS OID)) AS identity_options 
+FROM pg_catalog.pg_class LEFT OUTER JOIN pg_catalog.pg_attribute ON pg_catalog.pg_class.oid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_attribute.attnum > $10::SMALLINT AND NOT pg_catalog.pg_attribute.attisdropped LEFT OUTER JOIN pg_catalog.pg_description ON pg_catalog.pg_description.objoid = pg_catalog.pg_attribute.attrelid AND pg_catalog.pg_description.objsubid = pg_catalog.pg_attribute.attnum JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relkind = ANY (ARRAY[$11::VARCHAR, $12::VARCHAR, $13::VARCHAR, $14::VARCHAR, $15::VARCHAR]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != $16::VARCHAR AND pg_catalog.pg_class.relname IN ($17::VARCHAR) ORDER BY pg_catalog.pg_class.relname, pg_catalog.pg_attribute.attnum
+2025-05-07 01:50:32,171 | INFO | [generated in 0.00260s] ('always', 'a', 'start', 'increment', 'minvalue', 'maxvalue', 'cache', 'cycle', '', 0, 'r', 'p', 'f', 'v', 'm', 'pg_catalog', 'usuarios')
+2025-05-07 01:50:32,711 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.format_type(pg_catalog.pg_type.typbasetype, pg_catalog.pg_type.typtypmod) AS attype, NOT pg_catalog.pg_type.typnotnull AS nullable, pg_catalog.pg_type.typdefault AS "default", pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, domain_constraints.condefs, domain_constraints.connames, pg_catalog.pg_collation.collname 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN pg_catalog.pg_collation ON pg_catalog.pg_type.typcollation = pg_catalog.pg_collation.oid LEFT OUTER JOIN (SELECT pg_catalog.pg_constraint.contypid AS contypid, array_agg(pg_catalog.pg_get_constraintdef(pg_catalog.pg_constraint.oid, $1::BOOLEAN)) AS condefs, array_agg(CAST(pg_catalog.pg_constraint.conname AS TEXT)) AS connames 
+FROM pg_catalog.pg_constraint 
+WHERE pg_catalog.pg_constraint.contypid != $2::INTEGER GROUP BY pg_catalog.pg_constraint.contypid) AS domain_constraints ON pg_catalog.pg_type.oid = domain_constraints.contypid 
+WHERE pg_catalog.pg_type.typtype = $3::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:50:32,711 | INFO | [generated in 0.00101s] (True, 0, 'd')
+2025-05-07 01:50:33,088 | INFO | SELECT pg_catalog.pg_type.typname AS name, pg_catalog.pg_type_is_visible(pg_catalog.pg_type.oid) AS visible, pg_catalog.pg_namespace.nspname AS schema, lbl_agg.labels AS labels 
+FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_type.typnamespace LEFT OUTER JOIN (SELECT pg_catalog.pg_enum.enumtypid AS enumtypid, array_agg(CAST(pg_catalog.pg_enum.enumlabel AS TEXT) ORDER BY pg_catalog.pg_enum.enumsortorder) AS labels 
+FROM pg_catalog.pg_enum GROUP BY pg_catalog.pg_enum.enumtypid) AS lbl_agg ON pg_catalog.pg_type.oid = lbl_agg.enumtypid 
+WHERE pg_catalog.pg_type.typtype = $1::CHAR ORDER BY pg_catalog.pg_namespace.nspname, pg_catalog.pg_type.typname
+2025-05-07 01:50:33,088 | INFO | [generated in 0.00144s] ('e',)
+2025-05-07 01:50:33,484 | INFO | Tabelas encontradas no banco: [{'name': 'id', 'type': INTEGER(), 'nullable': False, 'default': "nextval('usuarios_id_seq'::regclass)", 'autoincrement': True, 'comment': None}, {'name': 'nome', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'email', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'senha_hash', 'type': VARCHAR(), 'nullable': False, 'default': None, 'autoincrement': False, 'comment': None}, {'name': 'descricao', 'type': VARCHAR(), 'nullable': True, 'default': None, 'autoincrement': False, 'comment': None}]
+2025-05-07 01:50:33,485 | INFO | COMMIT
+2025-05-07 01:50:42,692 | INFO | BEGIN (implicit)
+2025-05-07 01:50:42,694 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios
+2025-05-07 01:50:42,698 | INFO | [generated in 0.00134s] ()
+2025-05-07 01:51:55,949 | INFO | INSERT INTO usuarios (nome, email, senha_hash) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR) RETURNING usuarios.id
+2025-05-07 01:51:55,949 | INFO | [generated in 0.00096s] ('string2', 'string2@teste', '$2b$12$WwZsvL4A7T6t7FJu9hWocONzmENkLrAUZMYLy/xk88Gz8lcYQAFYS')
+2025-05-07 01:51:56,298 | INFO | COMMIT
+2025-05-07 01:51:56,480 | INFO | BEGIN (implicit)
+2025-05-07 01:51:56,480 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios 
+WHERE usuarios.id = $1::INTEGER
+2025-05-07 01:51:56,480 | INFO | [generated in 0.00201s] (3,)
+2025-05-07 01:52:22,200 | INFO | INSERT INTO usuarios (nome, email, senha_hash) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR) RETURNING usuarios.id
+2025-05-07 01:52:22,200 | INFO | [cached since 26.25s ago] ('string2', 'string2@teste.com', '$2b$12$0XJg2GyqpmmZU9GwuZa8QOewjW1MrfnVRhTummcxdbi.wl4bC8B.i')
+2025-05-07 01:52:22,368 | INFO | COMMIT
+2025-05-07 01:52:22,552 | INFO | BEGIN (implicit)
+2025-05-07 01:52:22,552 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios 
+WHERE usuarios.id = $1::INTEGER
+2025-05-07 01:52:22,567 | INFO | [cached since 26.08s ago] (4,)
+2025-05-07 01:52:39,332 | INFO | SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha_hash 
+FROM usuarios
+2025-05-07 01:52:39,333 | INFO | [cached since 116.6s ago] ()

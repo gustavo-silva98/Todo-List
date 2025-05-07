@@ -2,6 +2,9 @@ import asyncpg
 from backend.config import DATABASE_URL, logger
 from sqlalchemy import Column, String, Integer
 from backend.database import Base,engine
+from fastapi import Request
+from sqlalchemy.ext.asyncio import AsyncSession
+
 
 class Usuario(Base):
     __tablename__ = 'usuarios'
@@ -10,6 +13,7 @@ class Usuario(Base):
     nome = Column(String,nullable=False)
     email = Column(String, unique=True,nullable=False)
     senha_hash = Column(String,nullable=False)
+
 
 async def cria_tabelas():
     async with engine.begin() as conn:
@@ -25,3 +29,10 @@ async def close_db(conn):
     logger.info('Finalizando conexão com banco de dados')
     await conn.close()
     logger.info('Conexão finalizada com o banco de dados')
+
+
+async def get_db(request: Request) -> AsyncSession:
+    """
+    Pega a mesma sessão criada no lifespan (app.state.db).
+    """
+    return request.app.state.db
