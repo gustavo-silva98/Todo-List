@@ -1,6 +1,6 @@
 from backend.database.crud import UserCRUD
 from backend.utils.hash_password import PasswordHasher as Hasher
-from backend.schemas.schemas import CadastroUserInput,UserResponseDTO,UserCreateDTO
+from backend.schemas.schemas import CadastroUserInput,UserResponseDTO
 from sqlalchemy.ext.asyncio import AsyncSession
 from backend.database.database import Usuario
 
@@ -21,5 +21,13 @@ class UserService():
         return UserResponseDTO.from_orm(novo_usuario)
 
             
+    @staticmethod
+    async def delete_all_users(db: AsyncSession):
+        try:
+            await UserCRUD.deleta_todos_usuarios(db=db)
+        
+            return {'message':'Exclusão de Usuarios feita com sucesso!'}
+        except Exception as e:
+            return {'Erro': f"Falha ao excluir usuarios - Erro: {e}"}
 
         

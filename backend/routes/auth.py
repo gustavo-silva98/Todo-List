@@ -5,7 +5,7 @@ from backend.services.user_service import UserService
 from sqlalchemy.ext.asyncio import AsyncSession
 from backend.schemas.schemas import UserResponseDTO
 from backend.database.database import Usuario,get_db
-from sqlalchemy import select
+from sqlalchemy import select,delete
 from typing import List
 
 router = APIRouter()
@@ -18,18 +18,25 @@ async def read_submit(user: schemas.LoginInput):
 @router.post('/cadastro')
 async def cadastro_user(user: schemas.CadastroUserInput,db : AsyncSession = Depends(get_db)):
 
-        return await UserService.cadastra_usuario(data=user,db=db)
+    return await UserService.cadastra_usuario(data=user,db=db)
 
-
-@router.get(
-    "/",
-    response_model=List[UserResponseDTO],
-    summary="Lista todos os usuários cadastrados"
-)
+@router.get("/",response_model=List[UserResponseDTO],summary="Lista todos os usuários cadastrados")
 async def listar_usuarios(db: AsyncSession = Depends(get_db)):
     # 1) Executa um SELECT * FROM usuarios
     result = await db.execute(select(Usuario))
     usuarios = result.scalars().all()
 
     # 2) Retorna a lista de modelos Pydantic
+    return usuarios
+
+@router.delete('/limpar-usuarios')
+async def delete_all_rows(db: AsyncSession = Depends(get_db)):
+
+    return await UserService.delete_all_users(db=db)
+
+@router.post('/select-user/{email}')
+async def select_user_by_email(email:str, db:AsyncSession = Depends(get_db)):
+    
+    result = await db.execute(select(Usuario).where(Usuario.email == email)) 
+    usuarios = result.scalars().all()
     return usuarios
