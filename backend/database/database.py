@@ -10,7 +10,6 @@ class Usuario(Base):
     nome = Column(String,nullable=False)
     email = Column(String, unique=True,nullable=False)
     senha_hash = Column(String,nullable=False)
-    descricao = Column(String)
 
 async def cria_tabelas():
     async with engine.begin() as conn:
