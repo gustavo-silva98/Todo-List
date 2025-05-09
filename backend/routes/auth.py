@@ -3,12 +3,16 @@ from fastapi import APIRouter, Depends
 from backend.database.database import get_db
 from backend.services.user_service import UserService
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.schemas.schemas import UserResponseDTO
+from backend.schemas.schemas import UserResponseDTO, LoginInput
 from backend.database.database import Usuario,get_db
 from sqlalchemy import select,delete
 from typing import List
 
 router = APIRouter()
+
+@router.post('/')
+async def auth(user : LoginInput):
+    pass
 
 @router.post('/submit')
 async def read_submit(user: schemas.LoginInput):
@@ -40,3 +44,4 @@ async def select_user_by_email(email:str, db:AsyncSession = Depends(get_db)):
     result = await db.execute(select(Usuario).where(Usuario.email == email)) 
     usuarios = result.scalars().all()
     return usuarios
+

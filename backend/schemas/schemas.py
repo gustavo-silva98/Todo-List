@@ -20,12 +20,10 @@ class CadastroUserInput(BaseModel):
             raise ValueError("Senhas não coincidem")
         return self
         
-
 class UserCreateDTO(BaseModel):
     nome: str = Field(..., min_length=3, max_length=50)
     email : EmailStr
     senha : str = Field(..., min_length=6)
-
 
 class UserResponseDTO(BaseModel):
     id: int
@@ -35,6 +33,17 @@ class UserResponseDTO(BaseModel):
         "from_attributes": True
     }
 
+class Token(BaseModel):
+    acces_token : str
+    token_type : str
+
+class TokenData(BaseModel):
+    username : str | None = None
+
+class UserInDB(UserCreateDTO):
+    username: str
+    email: str | None = None
+    hashed_password: str
 
 
 
