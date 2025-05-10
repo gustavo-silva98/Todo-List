@@ -1,28 +1,20 @@
 from backend.schemas import schemas
 from fastapi import APIRouter, Depends,HTTPException,status
 from backend.services.user_service import UserService
+from backend.services.auth_service import AuthService
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.schemas.schemas import UserResponseDTO, LoginInput, Token
+from backend.schemas.schemas import UserResponseDTO,Token
 from backend.database.database import Usuario,get_db
 from sqlalchemy import select
 from typing import List
 from fastapi.security import OAuth2PasswordRequestForm
-from backend.security.security import cria_token_acesso,authenticate_user
 
 router = APIRouter()
 
 @router.post('/oauth-submit',response_model=Token)
 async def login_return_token(form_data : OAuth2PasswordRequestForm = Depends(),db:AsyncSession = Depends(get_db)):
-    user = await authenticate_user(email=form_data.username,password=form_data.password,db=db)
-    print(user)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Senha incorreta ou usuário incorreto",
-            headers={'WWW.Authenticate': "Bearer"}
-        )
-    access_token = cria_token_acesso(data={'sub': user.email})
-    return {"access_token": access_token, "token_type":"bearer"}
+    
+    return await AuthService.authenticate_and_get_token(db=db,email=form_data.username, password=form_data.password)
 
 @router.post('/submit')
 async def read_submit(user: schemas.LoginInput):

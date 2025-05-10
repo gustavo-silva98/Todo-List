@@ -4,10 +4,9 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from backend.config import SECRET_KEY, ALGORITHM,ACCESS_TOKEN_EXPIRE_MINUTES
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.schemas.schemas import UserInDB
 from backend.database.crud import UserCRUD
 from backend.security.hash_password import PasswordHasher as Hasher
-from backend.database.database import Usuario,get_db
+from backend.database.database import Usuario
 
 
 
