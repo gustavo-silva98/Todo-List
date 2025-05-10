@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.schemas.schemas import UserCreateDTO
-from backend.utils.hash_password import PasswordHasher as Hasher
+from backend.schemas.schemas import UserCreateDTO,UserInDB
+from backend.security.hash_password import PasswordHasher as Hasher
 from backend.database.database import Usuario
-from sqlalchemy import delete
+from sqlalchemy import delete,select
 
 class UserCRUD():
 
@@ -32,3 +32,9 @@ class UserCRUD():
             return {'message':'Exclusão de Usuarios feita com sucesso!'}
         except Exception as e:
             return {'Erro': f"Falha ao excluir usuarios - Erro: {e}"}
+    
+
+    @staticmethod
+    async def get_user_by_email(db:AsyncSession,email:str) -> UserInDB | None:
+        result = await db.execute(select(Usuario).where(Usuario.email == email)) 
+        return result.scalar_one_or_none()

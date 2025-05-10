@@ -1,5 +1,5 @@
 from backend.database.crud import UserCRUD
-from backend.utils.hash_password import PasswordHasher as Hasher
+from backend.security.hash_password import PasswordHasher as Hasher
 from backend.schemas.schemas import CadastroUserInput,UserResponseDTO
 from sqlalchemy.ext.asyncio import AsyncSession
 from backend.database.database import Usuario
@@ -30,4 +30,3 @@ class UserService():
         except Exception as e:
             return {'Erro': f"Falha ao excluir usuarios - Erro: {e}"}
 
-        
