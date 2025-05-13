@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from backend.database.database import cria_tabelas,engine
 from backend.config import logger
 from backend.database import SessionLocal
-from sqlalchemy import inspect
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
