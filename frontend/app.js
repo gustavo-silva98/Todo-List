@@ -38,3 +38,38 @@ function enviarCadastro() {
         alert('Erro ao realizar o cadastro. Verifique os dados e tente novamente.');
     });      
 }
+
+function loginGetToken() {
+    const email = document.getElementById('email-input-login').value;
+    const senha = document.getElementById('password-input-login').value;
+
+    const form = new URLSearchParams();
+    form.append('username', email);
+    form.append('password', senha);
+    form.append('grant_type', 'password');      // se você não usar grant_type, deixe em branco
+    form.append('scope', '');           // idem
+    form.append('client_id', 'string');       // se não for cliente OAuth
+    form.append('client_secret', 'string');   // se não for cliente OAuth
+
+    fetch('http://127.0.0.1:8000/auth/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: form.toString()
+      })
+      .then(async response => {
+        const data = await response.json();
+        if (!response.ok) {
+          console.error('Erro no login:', data);
+          alert('Erro: ' + JSON.stringify(data.detail));
+          return;
+        }
+        console.log('Sucesso', data);
+        alert("Login realizado com sucesso!");
+        mudarPagina('login-ok');
+      })
+      .catch(err => {
+        console.error('Erro de rede:', err);
+        alert('Erro ao conectar-se ao servidor.');
+      });
+    }
+
