@@ -1580,3 +1580,4 @@ WHERE pg_catalog.pg_class.relname = $1::VARCHAR AND pg_catalog.pg_class.relkind 
 FROM usuarios 
 WHERE usuarios.email = $1::VARCHAR
 2025-05-10 18:45:58,488 | INFO | [generated in 0.00084s] ('teste@teste.com',)
+2025-05-10 18:54:06,245 | INFO | ROLLBACK
